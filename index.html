@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Eid Mubarak!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00c6ff;
+            --secondary-color: #0072ff;
+            --accent-color: #ffcc2f;
+            --text-color: #f0f0f0;
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glow-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--secondary-color);
+            --ad-height: 50px;
+            --footer-spacing: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            /* Adjust padding-bottom to make space for the fixed ad banner */
+            padding-bottom: calc(var(--ad-height) + var(--footer-spacing) + env(safe-area-inset-bottom));
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 20px rgba(0, 198, 255, 0.2);
+            border: 1px solid var(--glass-border);
+            animation: fadeInContainer 1s ease-out;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #eid-gif {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeInElement 1s ease-out 0.2s backwards;
+        }
+
+        .festive-greeting {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color), #f7971e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(255, 204, 47, 0.5), 0 0 15px rgba(0, 198, 255, 0.3);
+            animation: fadeInGreeting 1.5s ease-in-out 0.5s backwards;
+        }
+        
+        @keyframes fadeInGreeting {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #nameInput {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-color);
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInElement 1s ease-out 0.8s backwards;
+        }
+
+        #nameInput::placeholder {
+            color: rgba(240, 240, 240, 0.7);
+        }
+
+        #nameInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 0 10px var(--primary-color);
+        }
+
+        .action-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+            outline: 2px solid transparent;
+            animation: fadeInElement 1s ease-out 1s backwards;
+        }
+
+        .action-button:hover, .action-button:focus {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(0, 114, 255, 0.6);
+            outline-color: rgba(255,255,255,0.7);
+        }
+        
+        .action-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        #customGreetingMessage {
+            margin-top: 25px;
+            font-size: 1.3rem;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            line-height: 1.6;
+            color: #e6e6e6;
+            display: none; /* Initially hidden */
+            animation: fadeInCustomMessage 0.5s ease-out;
+        }
+
+        @keyframes fadeInCustomMessage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .share-section {
+            margin-top: 25px;
+            display: none; /* Initially hidden */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            animation: fadeInShareSection 0.5s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInShareSection {
+             from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .share-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .share-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .share-button svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            fill: white;
+        }
+
+        #whatsappShare { background-color: #25D366; }
+        #facebookShare { background-color: #1877F2; }
+        #twitterShare { background-color: #1DA1F2; }
+        #copyLink { background-color: #6c757d; }
+
+        .audio-controls {
+            position: fixed;
+            bottom: calc(15px + env(safe-area-inset-bottom)); /* Adjust for ad if it were full width and audio higher */
+            /* Since ad is centered and 320px, this might not need adjustment unless screen is very small */
+            /* Let's assume audio controls sit above the ad space on narrow screens */
+            right: 15px;
+            background: var(--glass-bg);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000; /* Above ad */
+            transition: background-color 0.3s ease;
+        }
+        .audio-controls:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .audio-controls svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+
+        @keyframes fadeInElement {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(240, 240, 240, 0.6);
+            animation: fadeInElement 1s ease-out 1.2s backwards;
+            /* This will now have space below it due to body's padding-bottom */
+        }
+
+        /* Ad Container Styling */
+        .ad-banner-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--ad-height); /* Ad specifies 50px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: rgba(0,0,0,0.1); /* Optional: for testing or if ad lacks bg */
+            z-index: 990; /* Below audio controls */
+            padding-bottom: env(safe-area-inset-bottom); /* If ad itself needs to respect notch */
+        }
+        .ad-banner-container > div { /* Attempt to center the ad if it's in its own div */
+             margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="eid.gif" alt="Eid Mubarak Animation" id="eid-gif">
+
+        <h1 class="festive-greeting">✨ Eid Mubarak! May this Eid bring joy, peace, and prosperity to all! ✨</h1>
+
+        <input type="text" id="nameInput" placeholder="Enter your name (optional)">
+
+        <button id="generateButton" class="action-button">Generate Eid Wish</button>
+
+        <p id="customGreetingMessage"></p>
+
+        <div class="share-section">
+            <a href="#" id="whatsappShare" class="share-button" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.62 15.34 3.51 16.82L2.1 21.87L7.31 20.5C8.75 21.31 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 3.64C16.57 3.64 20.31 7.38 20.31 11.91C20.31 16.44 16.57 20.18 12.04 20.18C10.46 20.18 8.97 19.73 7.7 18.91L7.23 18.62L4.49 19.39L5.28 16.74L4.96 16.26C4.03 14.91 3.54 13.27 3.54 11.91C3.54 7.38 7.28 3.64 12.04 3.64M16.62 14.52C16.32 14.37 15.06 13.75 14.79 13.65C14.52 13.56 14.32 13.51 14.12 13.8C13.92 14.1 13.35 14.69 13.18 14.86C13 15.04 12.83 15.06 12.53 14.92C12.23 14.77 11.07 14.34 9.72 13.13C8.72 12.23 8.01 11.12 7.81 10.82C7.62 10.52 7.74 10.37 7.89 10.22C8.02 10.09 8.19 9.89 8.34 9.72C8.49 9.54 8.54 9.43 8.64 9.23C8.74 9.03 8.69 8.86 8.62 8.71C8.54 8.57 8.03 7.32 7.81 6.82C7.59 6.31 7.37 6.39 7.21 6.38H6.78C6.58 6.38 6.28 6.48 6.03 6.72C5.79 6.97 5.12 7.59 5.12 8.76C5.12 9.93 6.06 11.03 6.18 11.17C6.31 11.32 7.75 13.71 10.05 14.63C10.88 14.98 11.48 15.18 11.95 15.31C12.67 15.52 13.25 15.49 13.71 15.29C14.23 15.06 15.21 14.47 15.45 13.85C15.7 13.24 15.7 12.74 15.62 12.59C15.55 12.44 15.35 12.35 15.08 12.2C14.82 12.04 16.92 14.67 16.62 14.52Z"/></svg>
+                WhatsApp
+            </a>
+            <a href="#" id="facebookShare" class="share-button" target="_blank">
+                 <svg viewBox="0 0 24 24"><path d="M12 2.04C6.48 2.04 2 6.52 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.84C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.52 17.52 2.04 12 2.04Z"/></svg>
+                Facebook
+            </a>
+            <a href="#" id="twitterShare" class="share-button" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.48 2.96,10.3 2.38,10.03V10.07C2.38,12.21 3.89,13.99 5.96,14.4C5.59,14.49 5.2,14.52 4.8,14.52C4.53,14.52 4.27,14.5 4,14.44C4.55,16.22 6.19,17.55 8.18,17.59C6.71,18.73 4.88,19.43 2.91,19.43C2.57,19.43 2.24,19.41 1.92,19.36C3.92,20.72 6.28,21.5 8.85,21.5C16,21.5 20.33,15.46 20.33,10.29C20.33,10.12 20.33,9.95 20.32,9.78C21.11,9.23 21.85,8.53 22.46,7.73V6Z"/></svg>
+                Twitter
+            </a>
+            <button id="copyLink" class="share-button">
+                <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                Copy Link
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Crafted with ❤️ for a joyous Eid!
+    </div>
+
+    <div class="audio-controls" id="audioToggle">
+        <svg id="muteIcon" style="display:none;" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.59 3L14 9.41V14.59L16.59 12zM19 12c0 .82-.15 1.61-.41 2.34l1.43 1.43A8.973 8.973 0 0021 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zm-10.76-.29l1.28 1.28L7 14.7V9.3l-2.76-2.76A1 1 0 003 7.24v9.53c0 .29.14.55.37.73l.01.01.01.01a1.017 1.017 0 00.72.3l4.3-1.58 4.68 4.68A9.016 9.016 0 0012 21c.98 0 1.9-.16 2.74-.45l1.46 1.46A10.949 10.949 0 0112 23c-5.52 0-10-4.48-10-10 0-1.19.21-2.33.6-3.39L8.24 11.71z"/></svg>
+        <svg id="unmuteIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    </div>
+    <audio id="bgMusic" src="song.mp3" loop></audio>
+
+    <!-- Ad Banner Container -->
+    <div class="ad-banner-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '949e086fcb6c757d8d96e83c5a36b980',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/949e086fcb6c757d8d96e83c5a36b980/invoke.js"></script>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const generateButton = document.getElementById('generateButton');
+        const customGreetingMessage = document.getElementById('customGreetingMessage');
+        const shareSection = document.querySelector('.share-section');
+        
+        const whatsappShare = document.getElementById('whatsappShare');
+        const facebookShare = document.getElementById('facebookShare');
+        const twitterShare = document.getElementById('twitterShare');
+        const copyLink = document.getElementById('copyLink');
+
+        const bgMusic = document.getElementById('bgMusic');
+        const audioToggle = document.getElementById('audioToggle');
+        const muteIcon = document.getElementById('muteIcon');
+        const unmuteIcon = document.getElementById('unmuteIcon');
+
+        let currentGreetingText = "Eid Mubarak! ✨ Wishing you happiness and blessings!"; 
+
+        bgMusic.volume = 0.3;
+        
+        const playAudio = async () => {
+            try {
+                await bgMusic.play();
+                unmuteIcon.style.display = 'block';
+                muteIcon.style.display = 'none';
+            } catch (error) {
+                console.warn("Autoplay was prevented by browser policy.", error);
+                unmuteIcon.style.display = 'block';
+                muteIcon.style.display = 'none';
+            }
+        };
+        
+        window.addEventListener('load', playAudio);
+
+        audioToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    unmuteIcon.style.display = 'block';
+                    muteIcon.style.display = 'none';
+                }).catch(e => console.error("Error playing audio:", e));
+            } else {
+                bgMusic.pause();
+                unmuteIcon.style.display = 'none';
+                muteIcon.style.display = 'block';
+            }
+        });
+
+        generateButton.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            if (name) {
+                currentGreetingText = `Eid Mubarak from ${name}! 🎉 Wishing you happiness and blessings!`;
+            } else {
+                currentGreetingText = `Eid Mubarak! 🎉 Wishing everyone a joyous celebration, filled with happiness and blessings!`;
+            }
+            
+            customGreetingMessage.textContent = currentGreetingText;
+            customGreetingMessage.style.display = 'block';
+            shareSection.style.display = 'flex'; 
+
+            if (window.innerWidth < 768) {
+                 customGreetingMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        whatsappShare.addEventListener('click', (e) => {
+            e.preventDefault();
+            const siteUrl = window.location.href;
+            const message = encodeURIComponent(`${currentGreetingText} - See this greeting: ${siteUrl}`);
+            window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
+        });
+
+        facebookShare.addEventListener('click', (e) => {
+            e.preventDefault();
+            const siteUrl = encodeURIComponent(window.location.href);
+            const quote = encodeURIComponent(currentGreetingText);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}"e=${quote}`, '_blank');
+        });
+
+        twitterShare.addEventListener('click', (e) => {
+            e.preventDefault();
+            const siteUrl = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${currentGreetingText} #EidMubarak`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${siteUrl}`, '_blank');
+        });
+
+        copyLink.addEventListener('click', () => {
+            const siteUrl = window.location.href;
+            const textToCopy = `${currentGreetingText} - Create yours at: ${siteUrl}`;
+            
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Greeting and link copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy link. Please copy manually.');
+                });
+        });
+    </script>
+</body>
+</html>
